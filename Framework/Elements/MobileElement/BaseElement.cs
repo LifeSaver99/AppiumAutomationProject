@@ -1,11 +1,6 @@
 ﻿using AppiumAutomationForDesktopAndMobile.Framewrok.Helpers;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Appium.Android;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AppiumAutomationForDesktopAndMobile.Framewrok.Elements.MobileElement
 {
@@ -31,7 +26,7 @@ namespace AppiumAutomationForDesktopAndMobile.Framewrok.Elements.MobileElement
         {
             bool exists = true;
             try
-            {
+            {                               
                 GetElement();
             }
 
@@ -66,9 +61,9 @@ namespace AppiumAutomationForDesktopAndMobile.Framewrok.Elements.MobileElement
 
         public string GetText()
         {
-            
+
             return GetElement().Text;
-            
+
         }
 
         public void ClickID()
@@ -76,7 +71,7 @@ namespace AppiumAutomationForDesktopAndMobile.Framewrok.Elements.MobileElement
             _driverManager.Driver_Mobile.FindElementById(_elementLocator).Click();
         }
 
-       
+
         public void ClickXpath()
         {
             _driverManager.Driver_Mobile.FindElementByXPath(_elementLocator).Click();

@@ -1,11 +1,6 @@
 ﻿using AppiumAutomationForDesktopAndMobile.Applications.DesktopPages.Pages;
 using AppiumAutomationForDesktopAndMobile.Applications.DesktopPages.Section;
 using AppiumAutomationForDesktopAndMobile.Framewrok.Helpers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AppiumAutomationForDesktopAndMobile.Applications.DesktopPages
 {

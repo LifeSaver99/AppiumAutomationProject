@@ -1,12 +1,5 @@
 ﻿using AppiumAutomationForDesktopAndMobile.Applications.DesktopPages;
-using AppiumAutomationForDesktopAndMobile.Applications.MobilePages.Web;
 using AppiumAutomationForDesktopAndMobile.Framewrok.Helpers;
-using OpenQA.Selenium;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TechTalk.SpecFlow;
 
 namespace AppiumAutomationForDesktopAndMobile.StepDefinition.DesktopSteps
@@ -17,7 +10,7 @@ namespace AppiumAutomationForDesktopAndMobile.StepDefinition.DesktopSteps
         Clock _clock;
         DriverManager _driverManager;
 
-        public Stopwatch(DriverManager driverManager,Clock clock)
+        public Stopwatch(DriverManager driverManager, Clock clock)
         {
             _driverManager = driverManager;
             _clock = clock;
@@ -46,7 +39,7 @@ namespace AppiumAutomationForDesktopAndMobile.StepDefinition.DesktopSteps
         public void WhenIClickTheStartStopWatchButton()
         {
             _clock.Stopwatch.StartStopwatchButton.Click();
-            
+
         }
 
         [Then(@"The stopwatch pause button is displayed")]
@@ -55,7 +48,7 @@ namespace AppiumAutomationForDesktopAndMobile.StepDefinition.DesktopSteps
             _clock.Stopwatch.PauseStopwatchButton.WaitUntilExist(10);
         }
 
-        
+
 
     }
 }

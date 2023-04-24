@@ -1,11 +1,5 @@
 ﻿using AppiumAutomationForDesktopAndMobile.Applications.DesktopPages;
-using AppiumAutomationForDesktopAndMobile.Applications.MobilePages.Web;
 using AppiumAutomationForDesktopAndMobile.Framewrok.Helpers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TechTalk.SpecFlow;
 
 namespace AppiumAutomationForDesktopAndMobile.StepDefinition.DesktopSteps

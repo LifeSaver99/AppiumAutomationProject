@@ -34,4 +34,10 @@
     <Folder Include="Report\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Framework\Helpers\Driver\chromedriver.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

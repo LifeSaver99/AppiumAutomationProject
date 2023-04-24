@@ -143,3 +143,4 @@ C:\Users\Adedapo.Adeseye\source\repos\AppiumAutomationForDesktopAndMobile\obj\De
 C:\Users\Adedapo.Adeseye\source\repos\AppiumAutomationForDesktopAndMobile\obj\Debug\net6.0\AppiumAutomationForDesktopAndMobile.pdb
 C:\Users\Adedapo.Adeseye\source\repos\AppiumAutomationForDesktopAndMobile\obj\Debug\net6.0\AppiumAutomationForDesktopAndMobile.genruntimeconfig.cache
 C:\Users\Adedapo.Adeseye\source\repos\AppiumAutomationForDesktopAndMobile\obj\Debug\net6.0\ref\AppiumAutomationForDesktopAndMobile.dll
+C:\Users\Adedapo.Adeseye\source\repos\AppiumAutomationForDesktopAndMobile\bin\Debug\net6.0\Framework\Helpers\Driver\chromedriver.exe

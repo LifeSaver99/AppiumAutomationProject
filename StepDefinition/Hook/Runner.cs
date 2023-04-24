@@ -1,26 +1,10 @@
 ﻿using AppiumAutomationForDesktopAndMobile.Framewrok.Helpers;
-using AppiumAutomationForDesktopAndMobile.Framewrok.Variables;
-using Microsoft.Extensions.Configuration;
-using MongoDB.Bson;
-using OpenQA.Selenium.Appium.Service;
-using RazorEngine.Configuration;
-using SpecFlow.Internal.Json;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using TechTalk.SpecFlow;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+//#using AppiumAutomationForDesktopAndMobile.Framewrok.Variables;
 using AventStack.ExtentReports;
 using AventStack.ExtentReports.Reporter;
 using BoDi;
+using Microsoft.Extensions.Configuration;
+using TechTalk.SpecFlow;
 
 
 namespace AppiumAutomationForDesktopAndMobile.StepDefinition.Hook
@@ -36,7 +20,7 @@ namespace AppiumAutomationForDesktopAndMobile.StepDefinition.Hook
         static AventStack.ExtentReports.ExtentReports extent;
         static AventStack.ExtentReports.ExtentTest feature;
         AventStack.ExtentReports.ExtentTest scenario, steps;
-        public static ConfigSettings config;
+        //public static ConfigSettings config;
         static string configSettingsPath = System.IO.Directory.GetParent(@"../../../").FullName
             + Path.DirectorySeparatorChar + "FrameWork/Configuration/appsettings.json";
 
@@ -51,12 +35,13 @@ namespace AppiumAutomationForDesktopAndMobile.StepDefinition.Hook
         [BeforeTestRun]
         public static void BeforeTestRun()
         {
-            config = new ConfigSettings();
+            //config = new ConfigSettings();
             ConfigurationBuilder builder = new ConfigurationBuilder();
             builder.AddJsonFile(configSettingsPath);
             IConfigurationRoot configuration = builder.Build();
-            configuration.Bind(config);
 
+            //configuration.Bind(config);
+            string desktopApp = configuration["Desktop:App"];            
             ExtentHtmlReporter htmlReport = new ExtentHtmlReporter(reportPath);
             extent = new AventStack.ExtentReports.ExtentReports();
             extent.AttachReporter(htmlReport);

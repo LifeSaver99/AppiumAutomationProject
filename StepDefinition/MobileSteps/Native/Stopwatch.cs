@@ -1,11 +1,4 @@
-﻿using AppiumAutomationForDesktopAndMobile.Applications.DesktopPages;
-using AppiumAutomationForDesktopAndMobile.Applications.MobilePages.Native;
-using AppiumAutomationForDesktopAndMobile.Framewrok.Helpers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using AppiumAutomationForDesktopAndMobile.Framewrok.Helpers;
 using TechTalk.SpecFlow;
 using Clock = AppiumAutomationForDesktopAndMobile.Applications.MobilePages.Native.Clock;
 

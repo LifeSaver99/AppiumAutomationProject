@@ -1,12 +1,5 @@
-﻿using AppiumAutomationForDesktopAndMobile.Framewrok.Elements.MobileElement;
+﻿using AppiumAutomationForDesktopAndMobile.Applications.MobilePages.Web.Pages;
 using AppiumAutomationForDesktopAndMobile.Framewrok.Helpers;
-using AppiumAutomationForDesktopAndMobile.Applications.MobilePages.Web.Pages;
-using OpenQA.Selenium;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AppiumAutomationForDesktopAndMobile.Applications.MobilePages.Web
 {
@@ -17,7 +10,6 @@ namespace AppiumAutomationForDesktopAndMobile.Applications.MobilePages.Web
         {
             _driverManager = driverManager;
         }
-
         public LoginPageMobileWeb LoginPageMobileWeb => new(_driverManager);
     }
 }
