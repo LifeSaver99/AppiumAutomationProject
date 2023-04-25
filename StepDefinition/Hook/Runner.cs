@@ -3,6 +3,7 @@
 using AventStack.ExtentReports;
 using AventStack.ExtentReports.Reporter;
 using BoDi;
+using Castle.Core.Internal;
 using Microsoft.Extensions.Configuration;
 using TechTalk.SpecFlow;
 
@@ -20,10 +21,9 @@ namespace AppiumAutomationForDesktopAndMobile.StepDefinition.Hook
         static AventStack.ExtentReports.ExtentReports extent;
         static AventStack.ExtentReports.ExtentTest feature;
         AventStack.ExtentReports.ExtentTest scenario, steps;
-        //public static ConfigSettings config;
         static string configSettingsPath = System.IO.Directory.GetParent(@"../../../").FullName
             + Path.DirectorySeparatorChar + "FrameWork/Configuration/appsettings.json";
-
+        static IConfigurationRoot _configuration;
 
         public Runner(IObjectContainer objectContainer, DriverManager driverManager)
         {
@@ -35,13 +35,9 @@ namespace AppiumAutomationForDesktopAndMobile.StepDefinition.Hook
         [BeforeTestRun]
         public static void BeforeTestRun()
         {
-            //config = new ConfigSettings();
             ConfigurationBuilder builder = new ConfigurationBuilder();
             builder.AddJsonFile(configSettingsPath);
-            IConfigurationRoot configuration = builder.Build();
-
-            //configuration.Bind(config);
-            string desktopApp = configuration["Desktop:App"];            
+            _configuration = builder.Build();
             ExtentHtmlReporter htmlReport = new ExtentHtmlReporter(reportPath);
             extent = new AventStack.ExtentReports.ExtentReports();
             extent.AttachReporter(htmlReport);
@@ -57,7 +53,9 @@ namespace AppiumAutomationForDesktopAndMobile.StepDefinition.Hook
         public void BeforeScenario(ScenarioContext context)
         {
             scenario = extent.CreateTest(context.ScenarioInfo.Title);
-            _driverManager.LaunchApp();
+            _driverManager.Configuration = _configuration;
+            string driverTag = context.ScenarioInfo.Tags.Find<string>(t => t.Contains("driver:"));
+            _driverManager.LaunchApp(driverTag.Replace("driver:", ""));
             _driverManager.TimeOut(TimeSpan.FromSeconds(30));
         }
 
@@ -78,8 +76,6 @@ namespace AppiumAutomationForDesktopAndMobile.StepDefinition.Hook
             else if (context.TestError != null)
             {
                 steps.Log(Status.Fail, context.StepContext.StepInfo.Text);
-                string screenShot = _driverManager.Driver_Mobile.GetScreenshot().AsBase64EncodedString;
-                steps.AddScreenCaptureFromBase64String(screenShot);
                 string escapedStepName = Uri.EscapeDataString(context.StepContext.StepInfo.Text);
                 _driverManager.TakeScreenshot(escapedStepName);
             }

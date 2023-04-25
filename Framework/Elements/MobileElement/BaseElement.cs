@@ -26,7 +26,7 @@ namespace AppiumAutomationForDesktopAndMobile.Framewrok.Elements.MobileElement
         {
             bool exists = true;
             try
-            {                               
+            {
                 GetElement();
             }
 

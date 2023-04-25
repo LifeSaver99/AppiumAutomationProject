@@ -1,5 +1,4 @@
-﻿using AppiumAutomationForDesktopAndMobile.StepDefinition.Hook;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Appium;
 using OpenQA.Selenium.Appium.Android;
@@ -15,23 +14,24 @@ namespace AppiumAutomationForDesktopAndMobile.Framewrok.Helpers
     {
         public OpenQA.Selenium.Appium.Windows.WindowsDriver<WindowsElement> Driver_Desktop;
         public AppiumDriver<AndroidElement> Driver_Mobile;
-        public IConfigurationRoot Configuration { get; }
+        public IConfigurationRoot Configuration { get; set; }
+
+        private string driverType;
         public DriverManager() { }
 
-
-
-        public void LaunchApp()
+        public void LaunchApp(string appType)
         {
-            if (Configuration["Desktop:App"])
+            driverType = appType;
+            if (appType.ToLower().Equals("desktop"))
             {
                 var appiumLocalService = new AppiumServiceBuilder().UsingPort(4723).Build();
                 appiumLocalService.Start();
                 AppiumOptions options = new AppiumOptions();
-                options.AddAdditionalCapability("app", Runner.config.AppUrl);
+                options.AddAdditionalCapability("app", Configuration["Desktop:App"]);
                 options.AddAdditionalCapability("autoAcceptAlerts", true);
                 Driver_Desktop = new WindowsDriver<WindowsElement>(appiumLocalService, options);
             }
-            else if (Runner.config.AppType.Equals("mobile_web"))
+            else if (appType.ToLower().Equals("mobile_web"))
             {
                 //var appiumLocalService = new AppiumServiceBuilder().UsingPort(4723).Build();
                 //appiumLocalService.Start();
@@ -54,42 +54,30 @@ namespace AppiumAutomationForDesktopAndMobile.Framewrok.Helpers
                 //driver.Navigate().GoToUrl("https://www.bbc.co.uk");     
 
             }
-            else if (Runner.config.AppType.Equals("mobile"))
+            else if (appType.ToLower().Equals("mobile_native"))
             {
-
-                //var appiumLocalService = new AppiumServiceBuilder().UsingPort(4723).Build();
-                //appiumLocalService.Start();
                 AppiumOptions options = new AppiumOptions();
                 Uri remoteUri = new Uri("http://127.0.0.1:4723/wd/hub");
                 options.AddAdditionalCapability("deviceName", "emulator-5554");
-                options.AddAdditionalCapability("appPackage", Runner.config.AppUrl);
-                //options.AddAdditionalCapability("chromedriverExecutable", Runner.config.AppUrl);
-                //options.AddAdditionalCapability("browserName", "Chrome");
+                options.AddAdditionalCapability("appPackage", Configuration["Mobile_Native:App"]);
                 options.AddAdditionalCapability("appActivity", "com.android.deskclock.DeskClock");
-                /*com.google.android.apps.chrome.Main*/
                 options.AddAdditionalCapability("platformName", "Android");
-                //options.AddAdditionalCapability("version", "7.0");
                 options.AddAdditionalCapability("autoWebview", false);
-                //options.AddAdditionalCapability("appWaitActivity", "com.google.android.apps.chrome.app.watchwhile.WatchWhileActivity");
                 Driver_Mobile = new AndroidDriver<AndroidElement>(remoteUri, options);
-
-
             }
         }
 
         public void TimeOut(TimeSpan timeout)
         {
 
-            if (Runner.config.AppType.Equals("mobile"))
+            if (driverType.Equals("mobile_native"))
             {
                 Driver_Mobile.Manage().Timeouts().ImplicitWait = timeout;
             }
 
-            else if (Runner.config.AppType.Equals("desktop"))
+            else if (driverType.Equals("desktop"))
             {
                 Driver_Desktop.Manage().Timeouts().ImplicitWait = timeout;
-
-
             }
         }
 
@@ -103,22 +91,19 @@ namespace AppiumAutomationForDesktopAndMobile.Framewrok.Helpers
 
         public void TakeScreenshot(string name)
         {
-            if (Runner.config.AppType.Equals("mobile"))
+            if (driverType.Equals("mobile_native"))
             {
                 var screenshot = Driver_Mobile.GetScreenshot();
                 var filePathToSave = $"C:\\TempPath\\AppiumMobileScreenshot\\{name}.png";
                 screenshot.SaveAsFile(filePathToSave, ScreenshotImageFormat.Png);
             }
 
-            else if (Runner.config.AppType.Equals("desktop"))
+            else if (driverType.Equals("desktop"))
             {
                 var screenshot = Driver_Desktop.GetScreenshot();
                 var filePathToSave = $"C:\\TempPath\\AppiumDesktopScreenshot\\{name}.png";
                 screenshot.SaveAsFile(filePathToSave, ScreenshotImageFormat.Png);
-
-
             }
-
 
         }
 
@@ -143,7 +128,7 @@ namespace AppiumAutomationForDesktopAndMobile.Framewrok.Helpers
         }
         public void Quit()
         {
-            if (Runner.config.AppType.Equals("mobile"))
+            if (driverType.Equals("mobile_native"))
             {
                 if (Driver_Mobile != null)
                 {
@@ -153,7 +138,7 @@ namespace AppiumAutomationForDesktopAndMobile.Framewrok.Helpers
 
             }
 
-            else if (Runner.configuration["Desktop:App"])
+            else if (driverType.Equals("desktop"))
             {
                 if (Driver_Desktop != null)
                 {

@@ -75,9 +75,11 @@ namespace AppiumAutomationForDesktopAndMobile.Feature.DesktopFeature
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Start a new Stopwatch")]
+        [NUnit.Framework.CategoryAttribute("driver:desktop")]
         public void StartANewStopwatch()
         {
-            string[] tagsOfScenario = ((string[])(null));
+            string[] tagsOfScenario = new string[] {
+                    "driver:desktop"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Start a new Stopwatch", null, tagsOfScenario, argumentsOfScenario, featureTags);
 #line 4

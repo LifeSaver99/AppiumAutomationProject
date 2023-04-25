@@ -1,6 +1,6 @@
 ﻿Feature: StopWatchfeature
 
-
+@driver:desktop
 Scenario: Start a new Stopwatch
 	Given I launch the windows clock app
 	When  I click on the Stopwatch tab

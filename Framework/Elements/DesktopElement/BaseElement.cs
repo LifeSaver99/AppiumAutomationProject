@@ -1,5 +1,4 @@
 ﻿using AppiumAutomationForDesktopAndMobile.Framewrok.Helpers;
-using OpenQA.Selenium;
 using OpenQA.Selenium.Appium.Windows;
 
 namespace AppiumAutomationForDesktopAndMobile.Framewrok.Elements.DesktopElement

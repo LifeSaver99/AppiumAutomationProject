@@ -2,12 +2,13 @@
 
 
 
-
+@driver:desktop
 Scenario: Navigate to the Focus Session Tab
 	Given I launch the windows clock app
 	When  I click on the Focus Session tab
 	Then  the get ready to focus header is displayed
 
+@driver:desktop
 Scenario: Start a new focused session
 	Given I launch the windows clock app
 	When  I click on the Focus Session tab
